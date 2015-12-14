@@ -90,7 +90,8 @@ public class MyArrayList<AnyType> implements Iterable<AnyType>{
     }
     
     public void remove(){
-      MyArrayList.this.remove(--current); //why --current? since next() method uses current++.
+      MyArrayList.this.remove(--current); //why --current? since next() method uses current++. why not current--
+      //maybe it's because arrarylist's size is altered by this remove manipulation... i'm not sure
     }
   }
 }
