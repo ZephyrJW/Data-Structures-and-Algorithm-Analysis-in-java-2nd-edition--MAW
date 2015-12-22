@@ -1,0 +1,26 @@
+栈模型：
+  1. LIFO(后进先出) 
+  2.应用：
+    a. 平衡符号 [()]合法， [(])错误
+    b. 后缀表达式
+    c. 中缀到后缀的转换, a+b*c+(d*e+f)*g --> abc*+de*f+g*+
+    d. 方法调用，类似于平衡符号
+  3. avoid tail recursion, for example:
+    public static <anytype> void pritList(Iterator<anytype> itr){
+      if(!itr.hasNext()) return;
+      
+      System.out.println(itr.next());
+      printList(itr);
+    }
+     may overflow, instead, we should:
+    public static <anytype> void printList(Iterator<anytype> itr){
+      while(true){
+        if(!itr.hasNext()) return;
+        
+        System.out.println(itr.next());
+      }
+    }
+  
+队列:
+  currentSize  means  back = front-1, that queue is empty
+    
