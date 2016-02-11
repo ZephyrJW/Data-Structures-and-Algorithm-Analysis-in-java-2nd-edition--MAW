@@ -56,23 +56,57 @@ public class BinarySearchTree<AnyType> extends Comparable<super AnyType>{
   }
   
   private boolean contains(AnyType x, BinaryNode<AnyType> t){
+    if(t == null) return false;
     
+    int compareResult = x.compareTo(t.element);
+    
+    if(compareResult < 0){
+      return contains(x, t.left);
+    }else if(compareResult > 0)
+      return contains(x, t.right);
+    else return true;
   }
   
   private BinaryNode<AnyType> findMin(BinaryNode<AnyType> t){
-    
+    if( t == null) return null;
+    else if(t.left == null) return t;
+    return findMin(t.left);
   }
   
   private BinaryNode<AnyType> findMax(BinaryNode<AnyType> t){
-    
+    if(t != null)
+      while(t.right != null)
+        t = t.right;
+        
+    return t;
   }
   
   private BinaryNode<AnyType> insert(AnyType x, BinaryNode<AnyType> t){
+    if(t == null) return new BinaryNode<anytype>(x, null, null);
+    int compareResult = x.compareTo(t.element);
     
+    if(compareResult < 0)
+      t.left = insert(x, t.left);
+    else if(compareResult > 0)
+      t.right = insert(x, t.right);
+    else return t; //compareResult == 0 means it's a duplicate
   }
   
   private BinaryNode<AnyType> remove(AnyType x, BinaryNode<AnyType> t){
+    if(t == null) return t;
     
+    int compareResult = x.compareTo(t.element);
+    
+    if(compareResult < 0)
+      t.left = remove(x, t.left);
+    else if(compareResutl > 0)
+      t.right = remove(x, t.right);
+    else if(t.left != null && t.right != null){
+      t.element = findMin(t.right).element;
+      t.right = remove(t.element, t.right);
+    }
+    else t = (t.left != null)? t.left:t.right;
+    return t;
   }
   
   private void printTree(BinaryNode<AnyType> t){
